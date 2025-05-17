@@ -1,107 +1,73 @@
-import * as readline from 'readline';
-//ingresar el comando en la terminal para ejecutar      npm run dev
+import { insertarCandidato, insertarEleccion, insertarPartido, insertarTipoEleccion, insertarUnidadVotacion } from "./crud";
+import { initDatabase } from "./database";
+import {consultarCandidatos,consultarElecciones,consultarPartidos,consultarTiposEleccion,consultarUnidadesDeVotacion} from "../src/crud_consultas"
+import { actualizarCandidato,actualizarEleccion, actualizarPartido,actualizarTipoEleccion,actualizarUnidadVotacion } from "./crud_update";
+async function main() {
+  await initDatabase();
 
-interface Votante {
-  nombre: string;
-  cedula: string;
-  voto?: string | "Blanco" | "Nulo";
+  // 1. Insertar tipo de elección
+  //const tipo = await insertarTipoEleccion(" Estudiantil");
+  //console.log("Tipo de elección creado:", tipo);
+
+  // 2. Insertar partido
+  //const partido = await insertarPartido("Alinza Estudiantil");
+  //console.log("Partido creado:", partido);
+
+  // 3. Insertar elección (requiere tipoEleccionId)
+  //const eleccion = await insertarEleccion("Elección 2025", new Date("2025-12-01"), tipo.id);
+  //console.log("Elección creada:", eleccion);
+
+  // 4. Insertar candidato (requiere eleccionId y partidoId)
+  //const candidato = await insertarCandidato("Juan Mero", eleccion.id, partido.id);
+  //console.log("Candidato creado:", candidato);
+
+  // 5. Insertar unidad de votación (opcional: reporta_resultados = true/false)
+  //const unidad = await insertarUnidadVotacion("Noveno A", true);
+  //console.log("Unidad de votación creada:", unidad);
+
+    // Consultar tipos de elección
+  const tipos = await consultarTiposEleccion();
+  console.log("Todos los tipos de elección:", tipos);
+
+  // Consultar partidos
+  const partidos = await consultarPartidos();
+  console.log("Todos los partidos:", partidos);
+
+  // Consultar elecciones
+  const elecciones = await consultarElecciones();
+  console.log("Todas las elecciones:", elecciones);
+
+  // Consultar candidatos
+  const candidatos = await consultarCandidatos();
+  console.log("Todos los candidatos:", candidatos);
+
+  // Consultar unidades de votación
+  const unidades = await consultarUnidadesDeVotacion();
+  console.log("Todas las unidades de votación:", unidades);
+
+  // Ejemplo: actualizar un tipo de elección con id 1
+  //const tipoActualizado = await actualizarTipoEleccion(1, "Universitario");
+  //console.log("Tipo de elección actualizado:", tipoActualizado);
+
+  // Ejemplo: actualizar un partido con id 1
+  //const partidoActualizado = await actualizarPartido(1, "Poder universitario");
+  //console.log("Partido actualizado:", partidoActualizado);
+
+  // Ejemplo: actualizar una elección con id 1 (nombre, fecha, id tipoEleccion)
+  //const eleccionActualizada = await actualizarEleccion(1, "Elección 2026", new Date("2026-01-01"), 1);
+  //console.log("Elección actualizada:", eleccionActualizada);
+
+  // Ejemplo: actualizar un candidato con id 1 (nombre, id eleccion, id partido)
+  //const candidatoActualizado = await actualizarCandidato(1, "karla Mendoza", 1, 1);
+  //console.log("Candidato actualizado:", candidatoActualizado);
+
+  // Ejemplo: actualizar unidad de votación con id 1 (nombre, reporta_resultados)
+  //const unidadActualizada = await actualizarUnidadVotacion(1, "Informatica", true);
+  //console.log("Unidad de votación actualizada:", unidadActualizada);
+
+
 }
 
-type TipoEleccion = "Presidencial" | "Estudiantil" | "Municipal" | "Otra";
 
-interface Candidato {
-  nombre: string;
-  votos: number;
-}
+main();
 
-interface Eleccion {
-  nombre: string;
-  tipo: TipoEleccion;
-  votosValidos: number;
-  votosNulos: number;
-  votosBlanco: number;
-  candidatos: Candidato[];
-  votantes: Votante[];
-}
-
-const elecciones: Eleccion[] = [
-  {
-    nombre: "Elección Municipal Ciudad Y",
-    tipo: "Municipal",
-    votosValidos: 2,
-    votosNulos: 0,
-    votosBlanco: 1,
-    candidatos: [
-      { nombre: "Candidato 1", votos: 1 },
-      { nombre: "Candidato 2", votos: 1 }
-    ],
-    votantes: [
-      { nombre: "Miguel", cedula: "123", voto: "Candidato Municipal 1" },
-      { nombre: "Laura", cedula: "456", voto: "Candidato Municipal 2" },
-      { nombre: "Paula", cedula: "987", voto: "Blanco" }
-    ]
-  },
-  {
-    nombre: "Elección Estudiantil Universidad",
-    tipo: "Estudiantil",
-    votosValidos: 6,
-    votosNulos: 1,
-    votosBlanco: 1,
-    candidatos: [
-      { nombre: "Candidato 1", votos: 5 },
-      { nombre: "Candidato 2", votos: 1 }
-    ],
-    votantes: [
-      { nombre: "Carlos", cedula: "789", voto: "Estudiante 1" },
-      { nombre: "Ana", cedula: "321", voto: "Estudiante 2" },
-      { nombre: "Luis", cedula: "654", voto: "Nulo" },
-      { nombre: "Paula", cedula: "987", voto: "Blanco" },
-      { nombre: "David", cedula: "111", voto: "Estudiante 1" },
-      { nombre: "Maria", cedula: "222", voto: "Estudiante 1" },
-      { nombre: "Daniela", cedula: "333", voto: "Estudiante 1" },
-      { nombre: "Karla", cedula: "444", voto: "Estudiante 1" }
-    ]
-  }
-];
-
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-
-rl.question("Ingrese su nombre: ", (nombre) => {
-  rl.question("Ingrese su cédula: ", (cedula) => {
-    const eleccionesVotadas = elecciones.filter(eleccion =>
-      eleccion.votantes.some(v => v.nombre === nombre && v.cedula === cedula)
-    );
-
-    if (eleccionesVotadas.length > 0) {
-      console.log("\nUsted ya sufragó. Ver resultados:");
-
-      eleccionesVotadas.forEach((eleccion, index) => {
-        console.log(`${index + 1}. ${eleccion.nombre}`);
-      });
-
-      rl.question("\nSeleccione el número de la elección para ver detalles: ", (input) => {
-        const opcion = parseInt(input);
-        const seleccionada = eleccionesVotadas[opcion - 1];
-
-        if (seleccionada) {
-          console.log(`\nResultado de ${seleccionada.nombre}:`);
-          seleccionada.candidatos.forEach(c => {
-            console.log(`- ${c.nombre}: ${c.votos} votos`);
-          });
-          console.log(`Votos en blanco: ${seleccionada.votosBlanco}`);
-          console.log(`Votos nulos: ${seleccionada.votosNulos}`);
-        } else {
-          console.log("Opción inválida.");
-        }
-        rl.close();
-      });
-
-    } else {
-      console.log("Usted no ha votado aún.");
-      rl.close();
-    }
-  });
-});
