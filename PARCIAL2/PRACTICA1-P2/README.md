@@ -1,5 +1,5 @@
 Practica 1 del parcial 2 usanndo 3 entidades del proyecto
-# Se usaron las entidades del modulo de administracion del proyecto de donaciones, en la cual un adminstrador se puede registrar y a la vez ponder registrar en agenda los eventos y los tipos de reportes con una descripcion breve.
+# Se usaron las entidades del modulo de administracion del proyecto de donaciones, en la cual un adminstrador se puede registrar y a la vez poder registrar en agenda los eventos y los tipos de reportes con una descripcion breve.
 
 # instalar dependencias
 npm install
