@@ -1,0 +1,96 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Administrator {
+  id: ID!
+  nombre: String!
+  usuario: String!
+  correo: String!
+  password: String!
+  createAt: DateTime!
+  updateAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type AgendaEvent {
+  id: ID!
+  titulo: String!
+  descripcion: String!
+  fecha: String!
+  estado: String!
+}
+
+type ReportType {
+  id: ID!
+  tipo: String!
+  reporte: String!
+  createAt: DateTime!
+  updateAt: DateTime!
+}
+
+type Query {
+  administrators: [Administrator!]!
+  administrator(id: String!): Administrator!
+  agendaEvents: [AgendaEvent!]!
+  agendaEvent(id: String!): AgendaEvent!
+  reportTypes: [ReportType!]!
+  reportType(id: String!): ReportType!
+}
+
+type Mutation {
+  createAdministrator(createAdministratorInput: CreateAdministratorInput!): Administrator!
+  updateAdministrator(updateAdministratorInput: UpdateAdministratorInput!): Administrator!
+  removeAdministrator(id: String!): Administrator!
+  createAgendaEvent(createAgendaEventInput: CreateAgendaEventInput!): AgendaEvent!
+  updateAgendaEvent(updateAgendaEventInput: UpdateAgendaEventInput!): AgendaEvent!
+  removeAgendaEvent(id: String!): AgendaEvent!
+  createReportType(createReportTypeInput: CreateReportTypeInput!): ReportType!
+  updateReportType(updateReportTypeInput: UpdateReportTypeInput!): ReportType!
+  removeReportType(id: String!): ReportType!
+}
+
+input CreateAdministratorInput {
+  nombre: String!
+  usuario: String!
+  correo: String!
+  password: String!
+}
+
+input UpdateAdministratorInput {
+  nombre: String
+  usuario: String
+  correo: String
+  password: String
+  id: ID!
+}
+
+input CreateAgendaEventInput {
+  titulo: String!
+  descripcion: String!
+  fecha: String!
+  estado: String!
+}
+
+input UpdateAgendaEventInput {
+  titulo: String
+  descripcion: String
+  fecha: String
+  estado: String
+  id: ID!
+}
+
+input CreateReportTypeInput {
+  tipo: String!
+  reporte: String!
+}
+
+input UpdateReportTypeInput {
+  tipo: String
+  reporte: String
+  id: ID!
+}
