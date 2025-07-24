@@ -4,7 +4,7 @@
 
 - Andrés García (Módulo: Donante – TypeScript)
 - Jereny Vera (Módulo: Solicitud – TypeScript)
-- [Integrante 3]
+- Jordy Franco (Módulo: Administrador – TypeScript)
 
 ---
 
@@ -190,7 +190,6 @@ npm run start:dev
 >
 > > La practica ayudó a comprender cómo funciona la comunicación entre microservicios mediante NATS,aunque fue un poco complicado la conexion entre en microservicio con NATS. El reto fue entender cómo conectar correctamente el Gateway sin que Nest arrojara errores de dependencias, en mi caso si hubo uno mas que otros errores pero fue por la insonsistencia entre variables lo que causo que tardar en conectarlos.Luego de verificar la conexion , se comprobo que si realizaba acciones como post, delete, update y get.
 
-(Agregar reflexiones personales de los demás si es grupal)
 
 > Jereny Vera:
 >
