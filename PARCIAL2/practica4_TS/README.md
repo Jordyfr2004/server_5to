@@ -198,7 +198,7 @@ npm run start:dev
 
 ```
 
-proyecto-servidores/
+practica4_TS/
 │
 
 ├── gateway/ # API Gateway REST
