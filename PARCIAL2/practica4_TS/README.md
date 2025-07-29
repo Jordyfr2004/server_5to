@@ -3,8 +3,8 @@
 ## 👨‍💻 Integrantes del grupo
 
 - Andrés García (Módulo: Donante – TypeScript)
-- Jereny Vera (Módulo: Solicitud – TypeScript)
-- Jordy Franco (Módulo: Administrador – TypeScript)
+- Jereny Vera (Módulo: Solicitud – Java)
+- Jordy Franco (Módulo: Administrador – Python)
 
 ---
 
