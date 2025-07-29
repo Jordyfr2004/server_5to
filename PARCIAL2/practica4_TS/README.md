@@ -243,10 +243,6 @@ practica4_TS/
 
 ---
 
-## 👨‍🏫 Docente
-
-[Nombre del profesor] – [Materia]
 
 ```
 
-```
