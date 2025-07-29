@@ -24,9 +24,6 @@
 
 ### 1. Clonar el repositorio
 
-git clone https://github.com/usuario/proyecto-servidores.git
-cd proyecto-servidores
-
 ```
 
 
